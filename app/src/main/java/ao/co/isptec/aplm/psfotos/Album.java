@@ -11,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Album extends AppCompatActivity implements CriarAlbum.CriarAlbumListener {
+public class Album extends AppCompatActivity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,13 @@ public class Album extends AppCompatActivity implements CriarAlbum.CriarAlbumLis
         ImageView album = (ImageView) findViewById(R.id.album_album1);
         TextView tituloDoAlbum = (TextView) findViewById(R.id.album_tituloDoAlbum);
         tituloDoAlbum.setText("teste maluco");
+
+        CriarAlbumInterface criarAlbumInterface = new CriarAlbumInterface() {
+            @Override
+            public void dadosRecebido(String nome) {
+                receberNome(nome);
+            }
+        };
 
         album.setOnClickListener(v -> {
             Intent intent = new Intent(this, VerAlbum.class);
@@ -91,8 +99,8 @@ public class Album extends AppCompatActivity implements CriarAlbum.CriarAlbumLis
         startActivity(intent);
     }
 
-    @Override
-    public void applyTexts(String tituloDoAlbum) {
-
+    public void receberNome(String tituloDoAlbum) {
+        TextView titulo = (TextView) findViewById(R.id.album_tituloDoAlbum);
+        titulo.setText(tituloDoAlbum);
     }
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:layout_gravity="center"
     tools:context=".VerAlbum">
 
     <LinearLayout
@@ -53,7 +54,7 @@
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/three_dots" />
@@ -85,10 +86,7 @@
                         android:id="@+id/verAbum_AdicionarFoto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_margin="5dp"
                         app:srcCompat="@drawable/plus_sign" />
                 </LinearLayout>
 

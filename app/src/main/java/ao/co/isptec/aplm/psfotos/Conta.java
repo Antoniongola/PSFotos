@@ -2,39 +2,45 @@ package ao.co.isptec.aplm.psfotos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Conta extends AppCompatActivity {
+import ao.co.isptec.aplm.psfotos.controller.PsfotosController;
+import ao.co.isptec.aplm.psfotos.model.User;
 
+public class Conta extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("sessao", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         setContentView(R.layout.activity_conta);
+        final PsfotosController api = new PsfotosController();
         Button logoutButton = (Button) findViewById(R.id.logoutButton);
         ImageView imagemFoto = (ImageView) findViewById(R.id.imagemFoto);
         ImageView imagemAlbum = (ImageView) findViewById(R.id.imagemAlbum);
+        TextView contaUsername = (TextView) findViewById(R.id.contaUsername);
+        String username = sharedPreferences.getString("username", null);
+        //User user = api.selecionarUser(username);
+        contaUsername.setText(username);
 
-        TextView textoFoto = (TextView) findViewById(R.id.textoFoto);
-        TextView textoAlbum = (TextView) findViewById(R.id.textoAlbum);
+        logoutButton.setOnClickListener(V -> {
+            editor.clear();
+            editor.apply();
+            this.sair(V);
+        });
 
         imagemFoto.setOnClickListener(v -> {
             abrirFoto();
         });
 
-        textoFoto.setOnClickListener(v -> {
-            abrirFoto();
-        });
-
         imagemAlbum.setOnClickListener(v -> {
-            abrirAlbum();
-        });
-
-        textoAlbum.setOnClickListener(v -> {
             abrirAlbum();
         });
     }

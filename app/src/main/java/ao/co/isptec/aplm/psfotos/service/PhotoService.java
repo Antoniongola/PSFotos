@@ -21,7 +21,7 @@ import okhttp3.Response;
 public class PhotoService implements PhotoServiceInterface{
     private final OkHttpClient cliente = new OkHttpClient();
     private final Gson gson = new Gson();
-    private final String baseUrl = "http://e03a.120.220.290.com/api";
+    private final String baseUrl = "https://a771-129-122-220-41.ngrok-free.app/api";
 
     //método post
     public Photo adicionarFotoAoAlbum(String username, String nomeDaFoto, long albumId){

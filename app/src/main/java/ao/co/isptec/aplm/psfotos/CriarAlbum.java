@@ -1,5 +1,10 @@
 package ao.co.isptec.aplm.psfotos;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,38 +24,13 @@ import android.widget.TextView;
  * Use the {newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CriarAlbum extends DialogFragment {
-    private CriarAlbumListener criarAlbumListener;
-    /*
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class CriarAlbum extends DialogFragment implements CriarAlbumInterface{
+    private VerAlbum bindingVerAlbum;
+    private CriarAlbumInterface callback;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CriarAlbum.
-     */
-    /*
-    // TODO: Rename and change types and number of parameters
-    public static CriarAlbum newInstance(String param1, String param2) {
-        CriarAlbum fragment = new CriarAlbum();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
+    public void setCallback(CriarAlbumInterface callback){
+        this.callback = callback;
+    }
 
     public CriarAlbum() {
         // Required empty public constructor
@@ -58,31 +39,38 @@ public class CriarAlbum extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*
-        EditText nomeDoAlbum = (EditText) findViewById(R.id.criarAlbum_titulo);
-        TextView criarAlbumNovo = (TextView) findViewById(R.id.criarAlbumButton);
-        criarAlbumNovo.setOnClickListener(V -> {
-            if(nomeDoAlbum != null)
-
-        });*/
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_criar_album, container);
     }
 
     @Override
-    public void onAttachFragment(@NonNull Fragment childFragment) {
-        super.onAttachFragment(childFragment);
-        criarAlbumListener = (CriarAlbumListener) childFragment;
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        EditText nomeDoAlbum = (EditText) this.getView().findViewById(R.id.criarAlbum_titulo);
+        Button criarAlbumNovo = (Button) this.getView().findViewById(R.id.criarAlbumButton);
+        criarAlbumNovo.setOnClickListener(V -> {
+            //callback.dadosRecebido(nomeDoAlbum.getText().toString());
+            /*
+            if(nomeDoAlbum.getText().toString() != null){
+                TextView tituloAlbum = (TextView) bindingVerAlbum.findViewById(R.id.album_tituloDoAlbum);
+                tituloAlbum.setText(nomeDoAlbum.getText().toString());
+            }
+            */
+            dismiss();
+        });
     }
 
-    public interface CriarAlbumListener{
-        void applyTexts(String tituloDoAlbum);
+    @Override
+    public void dadosRecebido(String nome) {
+        /*
+        EditText nomeDoAlbum = (EditText) this.getView().findViewById(R.id.criarAlbum_titulo);
+        nomeDoAlbum.setText(nome);*/
     }
 }

@@ -23,7 +23,7 @@ import okhttp3.internal.connection.Exchange;
 public class AlbumService implements AlbumServiceInterface{
     private final OkHttpClient cliente = new OkHttpClient();
     private final Gson gson = new Gson();
-    private final String baseUrl = "http://e03a.120.220.290.com/api";
+    private final String baseUrl = "https://a771-129-122-220-41.ngrok-free.app/api";
     public boolean criarAlbum(Album album, String username){
         boolean [] criado = new boolean[1];
         String json = gson.toJson(album);
